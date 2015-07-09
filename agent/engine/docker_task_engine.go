@@ -416,6 +416,7 @@ func (engine *DockerTaskEngine) createContainer(task *api.Task, container *api.C
 
 	hostConfig, hcerr := task.DockerHostConfig(container, containerMap)
 	hostConfig.NetworkMode = "host"
+	hostConfig.Privileged = true
 
 	if hcerr != nil {
 		return DockerContainerMetadata{Error: api.NamedError(hcerr)}
@@ -444,6 +445,7 @@ func (engine *DockerTaskEngine) createContainer(task *api.Task, container *api.C
 	engine.state.AddContainer(&api.DockerContainer{DockerName: containerName, Container: container}, task)
 
 	hostConfig.NetworkMode = "host"
+	hostConfig.Privileged = true
 	metadata := engine.client.CreateContainer(config, hostConfig, containerName)
 	if metadata.Error != nil {
 		return metadata
