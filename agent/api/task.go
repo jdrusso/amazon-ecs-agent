@@ -299,7 +299,6 @@ func (task *Task) dockerHostConfig(container *Container, dockerContainerMap map[
 		Binds:        binds,
 		PortBindings: dockerPortMap,
 		VolumesFrom:  volumesFrom,
-		NetworkMode: "host",
 		Privileged: true,
 	}
 	return hostConfig, nil
